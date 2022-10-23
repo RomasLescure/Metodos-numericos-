@@ -1,0 +1,77 @@
+from cgitb import reset
+from turtle import end_fill
+from matplotlib import pyplot as pyp
+
+    
+print("buenos dias")
+s1 = input ("Ingrese + o - para saber el signo del primer elemento ")
+if(s1 != '+' and s1 != '-'):
+    print("Valor ingresado no se puede registrar")
+    quit()
+c1 = input("Ingrese coeficiente del elemento 1 ")
+c1 = float(c1)
+ex1 = input ("Ingrese exponente de x en elemento 1 ")
+ex1 = float(ex1)
+s2 = input ("Ingrese + o - para saber el signo del segundo elemento ")
+if(s2 != '+' and s2 != '-'):
+    print("Valor ingresado no se puede registrar")
+    quit()
+c2 = input("Ingrese coeficiente del elemento 2 ")
+c2= float(c2)
+ex2 = input ("Ingrese exponente de x en elemento 2 ")
+ex2 = float(ex2)
+s3 = input ("Ingrese + o - para saber el signo del tercer elemento ")
+if(s3 != '+' and s3 != '-'):
+    print("Valor ingresado no se puede registrar")
+    quit()
+c3 = input("Ingrese coeficiente del elemento 3 ")
+c3 = float (c3)
+ex3 = input ("Ingrese exponente de x en elemento 3 ")
+ex3 = float (ex3)
+tol = float(0.01)
+
+def f(x) :
+    if(s1 == '+' and s2 == '+' and s3 == '+'):
+        return c1*x**ex1 + c2*x**ex2 + c3*x**ex3
+    elif(s1 == '+' and s2 == '+' and s3 == '-'):
+        return c1*x**ex1 + c2*x**ex2 - c3*x**ex3
+    elif(s1 == '+' and s2 == '-' and s3 == '-'):
+        return c1*x**ex1 - c2*x**ex2 - c3*x**ex3
+    elif(s1 == '+' and s2 == '-' and s3 == '+'):
+        return c1*x**ex1 - c2*x**ex2 + c3*x**ex3
+    elif(s1 == '-' and s2 == '+' and s3 == '+'):
+        return -c1*x**ex1 + c2*x**ex2 + c3*x**ex3
+    elif(s1 == '-' and s2 == '+' and s3 == '-'):
+        return -c1*x**ex1 + c2*x**ex2 - c3*x**ex3
+    elif(s1 == '-' and s2 == '-' and s3 == '-'):
+        return -c1*x**ex1 - c2*x**ex2 - c3*x**ex3
+    elif(s1 == '-' and s2 == '-' and s3 == '+'):
+        return -c1*x**ex1 - c2*x**ex2 + c3*x**ex3
+
+x = range(-5,10)
+pyp.plot(x, [f(i) for i in x])
+pyp.axhline(0, color="black")
+pyp.axvline(0, color="black")
+pyp.show()
+
+sup_x = input ("Inserte el valor superior de x ")
+sup_x = float(sup_x)
+inf_x = input ("Inserte el valor inferior de x ")
+inf_x = float(inf_x)
+
+contador = 0
+while((sup_x-inf_x)>= tol):
+    contador = contador + 1
+    xr= (sup_x + inf_x)/2
+    if(f(sup_x)>f(xr)):
+        sup_x = xr
+    elif(f(sup_x)<f(xr)):
+        inf_x = xr
+print ('Cantidad de iteraciones: ', contador)
+print ('los valores de x donde se encuentra aproximadamente la raiz es:  ', sup_x ,' y ' , inf_x)
+
+x = range(-5,10)
+pyp.plot(x, [f(i) for i in x])
+pyp.axhline(0, color="black")
+pyp.axvline(0, color="black")
+pyp.show()
